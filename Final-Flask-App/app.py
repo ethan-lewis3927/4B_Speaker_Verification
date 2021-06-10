@@ -46,9 +46,33 @@ def uploader():
 def verify():
     output=True
     pv.convert()
-    tensor1 = pv.loadWAV('static/file-1.wav', 100)
-    tensor1 = pv.loadWAV('static/file-2.wav', 100)
-    return render_template('index.html', prediction_text='Same Speaker: {}'.format(output))
+    # tensor1 = pv.loadWAV('static/file-1.wav', 100)
+    # tensor2 = pv.loadWAV('static/file-2.wav', 100)
+    
+    cdup = os.chdir("../voxceleb_trainer")
+    # cdintovoc = os.system("cd voxceleb_trainer")
+    for root, dirs, files in os.walk("."):
+        for filename in files:
+            print(filename)
+    runnn = os.system("python ./trainSpeakerNet.py --eval --model ResNetSE34L --log_input True --trainfunc angleproto --save_path exps/test --eval_frames 400 --initial_model baseline_lite_ap.model")
+    cdintoflask = os.chdir("../Final-Flask-App")
+
+    print('cdup: ', cdup)
+    # print('cdintovoc: ', cdintovoc)
+    print('runnn: ', runnn)
+    print('cdintoflask: ', cdintoflask)
+
+    f = open("static/result.txt", "r")
+    score = f.read()
+    print("score in flask: ", score)
+    score = float(score)
+    pred_text = ""
+    if (score < -0.8):
+        pred_text = "Not same speaker"
+    else:
+        pred_text = "Same speaker"
+
+    return render_template('index.html', prediction_text= pred_text)
 
 @app.route('/predict', methods=["POST"])
 def predict():
