@@ -46,19 +46,19 @@ def uploader():
 def verify():
     output=True
     pv.convert()
-    # tensor1 = pv.loadWAV('static/file-1.wav', 100)
-    # tensor2 = pv.loadWAV('static/file-2.wav', 100)
+
+    deepxi_cdup = os.chdir("../DeepXi-master")
+    run_deepxi = os.system("./run.sh VER='mhanet-1.1c' INFER=1 GAIN='mmse-lsa'")
+    cdintoflask = os.chdir("../Final-Flask-App")
+
+    # print('cdup: ', deepxi_cdup)
+    # print('runnn: ', run_deepxi)
     
     cdup = os.chdir("../voxceleb_trainer")
-    # cdintovoc = os.system("cd voxceleb_trainer")
-    for root, dirs, files in os.walk("."):
-        for filename in files:
-            print(filename)
     runnn = os.system("python ./trainSpeakerNet.py --eval --model ResNetSE34L --log_input True --trainfunc angleproto --save_path exps/test --eval_frames 400 --initial_model baseline_lite_ap.model")
     cdintoflask = os.chdir("../Final-Flask-App")
 
     print('cdup: ', cdup)
-    # print('cdintovoc: ', cdintovoc)
     print('runnn: ', runnn)
     print('cdintoflask: ', cdintoflask)
 
