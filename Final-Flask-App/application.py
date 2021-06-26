@@ -13,54 +13,53 @@ import matplotlib.pyplot as plt
 from flask import Flask, request, jsonify, render_template
 import pandas as pd
 import pickle
-from werkzeug import secure_filename
 import process_wav as pv
 import os
 
 
-app=Flask(__name__)#create instance on flask
+application=Flask(__name__)#create instance on flask
 model=pickle.load(open('regmodel.pkl','rb'))
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 UPLOAD_FOLDER = os.path.join(APP_ROOT, 'static')
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+application.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-@app.route('/')
+@application.route('/')
 def home():
     return render_template('index.html')
 
-@app.route('/uploader', methods = ['GET', 'POST'])
+@application.route('/uploader', methods = ['GET', 'POST'])
 def uploader():
    if request.method == 'POST':
 
         f1 = request.files['file-1']
-        full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'file-1.m4a')
+        full_filename = os.path.join(application.config['UPLOAD_FOLDER'], 'file-1.m4a')
         f1.save(full_filename)
 
         f2 = request.files['file-2']
-        full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'file-2.m4a')
+        full_filename = os.path.join(application.config['UPLOAD_FOLDER'], 'file-2.m4a')
         f2.save(full_filename)
         
         return render_template('index.html', upload_text='Upload Succesful')
 
-@app.route('/verify', methods=["POST"])
+@application.route('/verify', methods=["POST"])
 def verify():
     output=True
     pv.convert()
 
-    deepxi_cdup = os.chdir("../DeepXi-master")
-    run_deepxi = os.system("./run.sh VER='mhanet-1.1c' INFER=1 GAIN='mmse-lsa'")
-    cdintoflask = os.chdir("../Final-Flask-App")
+    # deepxi_cdup = os.chdir("DeepXi-master")
+    # run_deepxi = os.system("./run.sh VER='mhanet-1.1c' INFER=1 GAIN='mmse-lsa'")
+    # cdintoflask = os.chdir("..")
 
     # print('cdup: ', deepxi_cdup)
     # print('runnn: ', run_deepxi)
     
-    cdup = os.chdir("../voxceleb_trainer")
-    runnn = os.system("python ./trainSpeakerNet.py --eval --model ResNetSE34L --log_input True --trainfunc angleproto --save_path exps/test --eval_frames 400 --initial_model baseline_lite_ap.model")
-    cdintoflask = os.chdir("../Final-Flask-App")
+    cdup = os.chdir("voxceleb_trainer")
+    run_vox = os.system("python ./trainSpeakerNet.py --eval --model ResNetSE34L --log_input True --trainfunc angleproto --save_path exps/test --eval_frames 400 --initial_model baseline_lite_ap.model")
+    cdintoflask = os.chdir("..")
 
-    print('cdup: ', cdup)
-    print('runnn: ', runnn)
+    print('run_vox: ', run_vox)
     print('cdintoflask: ', cdintoflask)
+    # print('run_deepxi: ', run_deepxi)
 
     f = open("static/result.txt", "r")
     score = f.read()
@@ -74,7 +73,7 @@ def verify():
 
     return render_template('index.html', prediction_text= pred_text)
 
-@app.route('/predict', methods=["POST"])
+@application.route('/predict', methods=["POST"])
 def predict():
     int_features=[int(x) for x in request.form.values()]
     final_features=[np.array(int_features)]
@@ -84,4 +83,5 @@ def predict():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    application.run(debug=True)
+    application.run(host="0.0.0.0", port=5000)
