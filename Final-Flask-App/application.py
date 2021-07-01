@@ -73,15 +73,6 @@ def verify():
 
     return render_template('index.html', prediction_text= pred_text)
 
-@application.route('/predict', methods=["POST"])
-def predict():
-    int_features=[int(x) for x in request.form.values()]
-    final_features=[np.array(int_features)]
-    prediction=model.predict(final_features)
-    output=round(prediction[0],2)
-    return render_template('index.html', prediction_text='Profit should be ${}'.format(output))
-
-
 if __name__ == "__main__":
-    application.run(debug=True)
+#     application.run(debug=True)
     application.run(host="0.0.0.0", port=5000)
