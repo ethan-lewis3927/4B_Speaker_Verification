@@ -14,6 +14,7 @@
 html { width: 100%; height:100%; overflow:hidden; }
 
 body { 
+	display: flex;
 	width: 100%;
 	height:100%;
 	font-family: 'Open Sans', sans-serif;
@@ -30,13 +31,17 @@ body {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E1D6D', endColorstr='#092756',GradientType=1 );
 
 }
+
+.audio-choices{
+	margin: 11%;
+	margin-top: 40px;
+
+}
+
 .login { 
-	position: absolute;
-	top: 40%;
-	left: 50%;
-	margin: -150px 0 0 -150px;
 	width:400px;
 	height:400px;
+	margin-top: 40px;
 }
 
 .login h1 { color: #fff; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:center; }
@@ -59,5 +64,8 @@ input {
 	-o-transition: box-shadow .5s ease;
 	-ms-transition: box-shadow .5s ease;
 	transition: box-shadow .5s ease;
+	background: none;
+    border: none;
+    box-shadow: none;
 }
 input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2); }
