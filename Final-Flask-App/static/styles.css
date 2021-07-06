@@ -32,14 +32,19 @@ body {
 
 }
 
+.instructions{
+	width: 250px;
+	margin-top: 40px;
+}
+
 .audio-choices{
-	margin: 11%;
+	margin: 4%;
 	margin-top: 40px;
 
 }
 
 .login { 
-	width:400px;
+	width:350px;
 	height:400px;
 	margin-top: 40px;
 }

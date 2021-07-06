@@ -49,11 +49,11 @@ def audiochoices():
 
     # Find which audio files were checked
     if request.method == 'POST':
-        a1 = request.form.get('jonnydep1')
-        if (a1 == 'jonnydep1'):
+        a1 = request.form.get('earthamae1')
+        if (a1 == 'earthamae1'):
             choices.append(a1)
-        a2 = request.form.get('jonnydep2')
-        if (a2 == 'jonnydep2'):
+        a2 = request.form.get('earthamae2')
+        if (a2 == 'earthamae2'):
             choices.append(a2)
         a3 = request.form.get('denzelwashinton1')
         if (a3 == 'denzelwashinton1'):
@@ -93,7 +93,7 @@ def verifypreloaded():
     print("score in flask: ", score)
     score = float(score)
     pred_text = ""
-    if (score < -0.8):
+    if (score < -0.9):
         pred_text = "Not same speaker, score: " + str(score)[:6]
     else:
         pred_text = "Same speaker, score: "  + str(score)[:6]

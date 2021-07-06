@@ -13,6 +13,15 @@
 </head>
 
 <body>
+  <div class = "instructions">
+    <h3>Pre-loaded Instructions</h3>
+    <ul>
+      <li>1)  Select 2 audio files using the checkboxes</li>
+      <li>2)  Click "Confirm Audio Choices"</li>
+      <li>3)  Click "Verify Preloaded Speakers"</li>
+      <li>4)  Wait for results</li>
+    </ul>
+  </div>
  <div class = "audio-choices">
   <form action="{{ url_for('audiochoices')}}" method="POST">
     <div class = "audio-clip">
@@ -30,17 +39,17 @@
       </audio>
     </div>
     <div class = "audio-clip">
-      <input type="checkbox" id="jonnydep1" name="jonnydep1" value="jonnydep1">
-      <label for="jonnydep1">Jonny Depp 1</label><br>
+      <input type="checkbox" id="earthamae1" name="earthamae1" value="earthamae1">
+      <label for="earthamae1">Eartha Mae 1</label><br>
       <audio controls>
-        <source src="static/pre_loaded_wavs/jonnydep1.wav" type="audio/wav">
+        <source src="static/pre_loaded_wavs/earthamae1.wav" type="audio/wav">
       </audio>
     </div>
     <div class = "audio-clip">
-      <input type="checkbox" id="jonnydep2" name="jonnydep2" value="jonnydep2">
-      <label for="jonnydep2">Jonny Depp 2</label><br>
+      <input type="checkbox" id="earthamae2" name="earthamae2" value="earthamae2">
+      <label for="earthamae2">Eartha Mae 2</label><br>
       <audio controls>
-        <source src="static/pre_loaded_wavs/jonnydep2.wav" type="audio/wav">
+        <source src="static/pre_loaded_wavs/earthamae2.wav" type="audio/wav">
       </audio>
     </div>
     <button type="submit" class="btn btn-primary btn-block btn-large">Confirms Audio Choices</button>
@@ -51,8 +60,6 @@
   {{ audio_choice_text }}
  </div>
  <div class="login">
-	<h1>Speaker Verification</h1>
-
      <!-- Main Input For Receiving Query to our ML -->
     <form action="{{ url_for('uploader')}}" method="POST" enctype = "multipart/form-data">
 
@@ -86,6 +93,18 @@
    {{ prediction_text }}
    {{ upload_text }}
  </div>
+ <div class = "instructions">
+  <h3>Upload Instructions</h3>
+  <ul>
+    <li>1)  For each audio upload button, select one local audio file</li>
+    <li>2)  Audio files MUST be named 'file-1' and 'file-2'</li>
+    <li>3)  Audio files must be less than 10 seconds</li>
+    <li>4)  Audio files must be in 'm4a' file types</li>
+    <li>5)  Once file are uploaded, click 'Save Files'</li>
+    <li>6)  Once file are saved, click 'Verify Uploaded Speakers'</li>
+    <li>6)  Wait for results</li>
+  </ul>
+</div>
 
 
 </body>
