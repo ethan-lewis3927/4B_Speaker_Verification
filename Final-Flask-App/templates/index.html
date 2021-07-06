@@ -13,99 +13,107 @@
 </head>
 
 <body>
-  <div class = "instructions">
-    <h3>Pre-loaded Instructions</h3>
-    <ul>
-      <li>1)  Select 2 audio files using the checkboxes</li>
-      <li>2)  Click "Confirm Audio Choices"</li>
-      <li>3)  Click "Verify Preloaded Speakers"</li>
-      <li>4)  Wait for results</li>
-    </ul>
-  </div>
- <div class = "audio-choices">
-  <form action="{{ url_for('audiochoices')}}" method="POST">
-    <div class = "audio-clip">
-      <input type="checkbox" id="denzelwashinton1" name="denzelwashinton1" value="denzelwashinton1">
-      <label for="denzelwashinton1">Denzel Washington 1</label><br>
-      <audio controls>
-        <source src="static/pre_loaded_wavs/denzelwashinton1.wav" type="audio/wav">
-      </audio>
+  <div class = "pre-uploaded-section">
+    <div class = "instructions">
+      <h3>Instructions For Pre-Loaded Audio Files</h3>
+      <ul>
+        <li>1)  Select 2 audio files using the checkboxes</li>
+        <li>2)  Click "Confirm Audio Choices"</li>
+        <li>3)  Click "Verify Preloaded Speakers"</li>
+        <li>4)  Wait for results</li>
+      </ul>
     </div>
-    <div class = "audio-clip">
-      <input type="checkbox" id="denzelwashinton2" name="denzelwashinton2" value="denzelwashinton2">
-      <label for="denzelwashinton2">Denzel Washington 2</label><br>
-      <audio controls>
-        <source src="static/pre_loaded_wavs/denzelwashinton2.wav" type="audio/wav">
-      </audio>
-    </div>
-    <div class = "audio-clip">
-      <input type="checkbox" id="earthamae1" name="earthamae1" value="earthamae1">
-      <label for="earthamae1">Eartha Mae 1</label><br>
-      <audio controls>
-        <source src="static/pre_loaded_wavs/earthamae1.wav" type="audio/wav">
-      </audio>
-    </div>
-    <div class = "audio-clip">
-      <input type="checkbox" id="earthamae2" name="earthamae2" value="earthamae2">
-      <label for="earthamae2">Eartha Mae 2</label><br>
-      <audio controls>
-        <source src="static/pre_loaded_wavs/earthamae2.wav" type="audio/wav">
-      </audio>
-    </div>
-    <button type="submit" class="btn btn-primary btn-block btn-large">Confirms Audio Choices</button>
-  </form>
-  <form action="{{ url_for('verifypreloaded')}}" method="POST">
-    <button type="submit" class="btn btn-primary btn-block btn-large">Verify Pre-Loaded Speakers</button>
-  </form>
-  {{ audio_choice_text }}
- </div>
- <div class="login">
-     <!-- Main Input For Receiving Query to our ML -->
-    <form action="{{ url_for('uploader')}}" method="POST" enctype = "multipart/form-data">
-
-    <label for="avatar">Choose a Audio File 1 (m4a file):</label>
-    <input type="file"
-       id="file-1" name="file-1"
-       accept="audio/m4a">
-      <br>
-    <audio controls>
-      <source src="static/file-1.wav" type="audio/wav">
-    </audio>
-    <br><br>
-    <label for="avatar">Choose a Audio File 2 (m4a file):</label>
-    <input type="file"
-       id="file-2" name="file-2"
-       accept="audio/m4a">
-    <br>
-    <audio controls>
-      <source src="static/file-2.wav" type="audio/wav">
-    </audio>
-
-    <button type="submit" class="btn btn-primary btn-block btn-large">Save Files</button>
+   <div class = "audio-choices">
+    <form action="{{ url_for('audiochoices')}}" method="POST">
+      <div class = "audio-clip">
+        <label for="denzelwashinton1">Denzel Washington 1</label>
+        <input type="checkbox" id="denzelwashinton1" name="denzelwashinton1" value="denzelwashinton1"> <br>
+        <audio controls>
+          <source src="static/pre_loaded_wavs/denzelwashinton1.wav" type="audio/wav">
+        </audio>
+      </div>
+      <div class = "audio-clip">
+        <label for="denzelwashinton2">Denzel Washington 2</label>
+        <input type="checkbox" id="denzelwashinton2" name="denzelwashinton2" value="denzelwashinton2">
+        <br>
+        <audio controls>
+          <source src="static/pre_loaded_wavs/denzelwashinton2.wav" type="audio/wav">
+        </audio>
+      </div>
+      <div class = "audio-clip">
+        <label for="earthamae1">Eartha Mae 1</label>
+        <input type="checkbox" id="earthamae1" name="earthamae1" value="earthamae1"><br>
+        <audio controls>
+          <source src="static/pre_loaded_wavs/earthamae1.wav" type="audio/wav">
+        </audio>
+      </div>
+      <div class = "audio-clip">
+        <label for="earthamae2">Eartha Mae 2</label>
+        <input type="checkbox" id="earthamae2" name="earthamae2" value="earthamae2"><br>
+        <audio controls>
+          <source src="static/pre_loaded_wavs/earthamae2.wav" type="audio/wav">
+        </audio>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block btn-large sml-gap">Confirms Audio Choices</button>
     </form>
+    <form action="{{ url_for('verifypreloaded')}}" method="POST">
+      <button type="submit" class="btn btn-primary btn-block btn-large">Verify Pre-Loaded Speakers</button>
+    </form>
+   </div>
+  </div>
 
-  <form action="{{ url_for('verify')}}" method="POST">
-    <button type="submit" class="btn btn-primary btn-block btn-large">Verify Uploaded Speakers</button>
-  </form>
-
-   <br>
-   <br>
-   {{ prediction_text }}
-   {{ upload_text }}
+ <div class = "uploaded-section">
+  <div class = "instructions">
+    <h3>Instructions For Uploading Local Audio Files</h3>
+    <ul>
+      <li>1)  For each audio upload button, select one local audio file</li>
+      <li>2)  Audio files MUST be named 'file-1' and 'file-2'</li>
+      <li>3)  Audio files must be less than 10 seconds</li>
+      <li>4)  Audio files must be in 'm4a' file types</li>
+      <li>5)  Once file are uploaded, click 'Save Files'</li>
+      <li>6)  Once file are saved, click 'Verify Uploaded Speakers'</li>
+      <li>7)  Wait for results</li>
+    </ul>
+    </div>
+  
+   <div class="login">
+       <!-- Main Input For Receiving Query to our ML -->
+      <form action="{{ url_for('uploader')}}" method="POST" enctype = "multipart/form-data">
+  
+      <label for="avatar">Choose a Audio File 1 (m4a file):</label>
+      <input type="file"
+         id="file-1" name="file-1"
+         accept="audio/m4a">
+        <br>
+      <audio controls>
+        <source src="static/file-1.wav" type="audio/wav">
+      </audio>
+      <br><br>
+      <label for="avatar">Choose a Audio File 2 (m4a file):</label>
+      <input type="file"
+         id="file-2" name="file-2"
+         accept="audio/m4a">
+      <br>
+      <audio controls>
+        <source src="static/file-2.wav" type="audio/wav">
+      </audio>
+  
+      <button type="submit" class="btn btn-primary btn-block btn-large lrg-gap">Save Files</button>
+      </form>
+  
+    <form action="{{ url_for('verify')}}" method="POST">
+      <button type="submit" class="btn btn-primary btn-block btn-large">Verify Uploaded Speakers</button>
+    </form>
+  
+     <br>
+     <br>
+   </div>
  </div>
- <div class = "instructions">
-  <h3>Upload Instructions</h3>
-  <ul>
-    <li>1)  For each audio upload button, select one local audio file</li>
-    <li>2)  Audio files MUST be named 'file-1' and 'file-2'</li>
-    <li>3)  Audio files must be less than 10 seconds</li>
-    <li>4)  Audio files must be in 'm4a' file types</li>
-    <li>5)  Once file are uploaded, click 'Save Files'</li>
-    <li>6)  Once file are saved, click 'Verify Uploaded Speakers'</li>
-    <li>6)  Wait for results</li>
-  </ul>
+ <div class = "output-text">
+  {{ prediction_text }}
+  {{ upload_text }}
+  {{ audio_choice_text }}
 </div>
-
 
 </body>
 </html>

@@ -130,9 +130,9 @@ def verify():
     score = float(score)
     pred_text = ""
     if (score < -0.8):
-        pred_text = "Not same speaker, score: " + str(score)[6]
+        pred_text = "Not same speaker, score: " + str(score)[:6]
     else:
-        pred_text = "Same speaker, score: " + str(score)[6]
+        pred_text = "Same speaker, score: " + str(score)[:6]
 
     return render_template('index.html', prediction_text= pred_text)
 
