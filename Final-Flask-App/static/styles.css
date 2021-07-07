@@ -40,9 +40,12 @@ body {
 }
 
 .output-text{
-	height: 30px;
-    position: absolute;
-    width: 100%;
+	height: fit-content;
+	width: 40px;
+	margin-top: 25%;
+	font-size: 25px;
+    color: palegreen;
+    width: 300px;
 }
 
 li{

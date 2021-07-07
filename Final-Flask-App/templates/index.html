@@ -54,12 +54,19 @@
           <source src="static/pre_loaded_wavs/earthamae2.wav" type="audio/wav">
         </audio>
       </div>
-      <button type="submit" class="btn btn-primary btn-block btn-large sml-gap">Confirms Audio Choices</button>
+      <button type="submit" class="btn btn-primary btn-block btn-large sml-gap">Confirm Audio Choices</button>
     </form>
     <form action="{{ url_for('verifypreloaded')}}" method="POST">
       <button type="submit" class="btn btn-primary btn-block btn-large">Verify Pre-Loaded Speakers</button>
     </form>
    </div>
+  </div>
+
+  <div class = "output-text">
+    {{ prediction_text }}<br><br>
+    {{ distance_text }}
+    {{ upload_text }}
+    {{ audio_choice_text }}
   </div>
 
  <div class = "uploaded-section">
@@ -74,7 +81,7 @@
       <li>Wait for results</li>
     </ul>
     </div>
-  
+    
    <div class="login">
        <!-- Main Input For Receiving Query to our ML -->
       <form action="{{ url_for('uploader')}}" method="POST" enctype = "multipart/form-data">
@@ -108,11 +115,6 @@
      <br>
    </div>
  </div>
- <div class = "output-text">
-  {{ prediction_text }}
-  {{ upload_text }}
-  {{ audio_choice_text }}
-</div>
 
 </body>
 </html>
